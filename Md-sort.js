@@ -55,6 +55,12 @@ function insertionSort(arr) {
 // 测试插入排序
 console.log(insertionSort(arrA));
 
+function swap(arr, i, j) {
+  var temp = arr[j];
+  arr[j] = arr[i];
+  arr[i] = temp;
+  return arr;
+}
 
 /**
  * 冒泡排序
@@ -64,7 +70,7 @@ console.log(insertionSort(arrA));
  * 通过两两交换的方式, 每次只确保该内循环结束位置排序正确, 然后内层循环周期结束, 
  * 交由外层循环往后(或前)移动游标, 随即开始下一轮内层循环, 以此类推, 直至循环结束.
  * 
- * 平均时间复杂度 O(n²) ，最好 O(n)， 最坏 O(n²)
+ * 平均时间复杂度 O(n²) ，最好 O(n) 如果正序， 最坏 O(n²) 刚好完全反序
  * 空间复杂度 O(1)
  */
 function bubbleSort(arr) {
@@ -72,10 +78,14 @@ function bubbleSort(arr) {
     var temp = arr[i];
     console.log(temp);
 
-    for (var j=i+1;j<arr.length;j++) {
-      if (temp > arr[j]){
-        arr[j-1] = arr[j];
-        arr[j] = temp;
+    for (var j=0;j<arr.length-1-i;j++) {   //  
+
+      if (arr[j] > arr[j+1]){  // 前边的比后边的大，则进行交换
+        //swap(arr, j, j+1)  //两两交换位置
+
+        var temp2 = arr[j+1];
+        arr[j+1] = arr[j];
+        arr[j] = temp2;
       }
     }
   }
@@ -83,3 +93,4 @@ function bubbleSort(arr) {
 }
 // 测试冒泡排序
 console.log(bubbleSort(arrA));
+
